@@ -6,7 +6,8 @@ package com.mycompany.totemmarte.view;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import com.mycompany.totemmarte.controller.SessaoController;
 import java.util.List;
-        
+import javax.swing.JButton;
+
 
 public class TotemMain extends javax.swing.JFrame {
     
@@ -18,25 +19,19 @@ public class TotemMain extends javax.swing.JFrame {
         configurarJanela();
         //para colocar as sessoes
         controle= new SessaoController();
+        configurarBotaoAvaliacao();
         carregarSessoes();
-        
+
     }
 
     private void carregarSessoes() {
 
         List<SessaoModelo> dados = controle.listarSessoes();
 
-       SessaoPanel[] sessoes = new SessaoPanel[dados.size()];
+        distribuirSessoes(dados);
+    }
 
-       for (int i = 0; i < dados.size(); i++) {
-           sessoes[i] = new SessaoPanel();
-           sessoes[i].configurar(dados.get(i));
-       }
-
-       distribuirSessoes(sessoes);
-    }    
-
-    private void distribuirSessoes(SessaoPanel[] sessoes) {
+    private void distribuirSessoes(List<SessaoModelo> sessoes) {
 
     // 🔥 limpa os paineis antigos
     pnlMarte.removeAll();
@@ -44,20 +39,31 @@ public class TotemMain extends javax.swing.JFrame {
     pnlCuriosity.removeAll();
     pnlPerseverance.removeAll();
 
-        for (int i = 0; i < sessoes.length; i++) {
+        for (SessaoModelo sessao : sessoes) {
+            SessaoPanel painel = new SessaoPanel();
+            painel.configurar(sessao);
 
-            int grupo = i / 3;
-
-            switch (grupo) {
-                case 0 -> pnlMarte.add(sessoes[i]);
-                case 1 -> pnlS_O.add(sessoes[i]);
-                case 2 -> pnlCuriosity.add(sessoes[i]);
-                case 3 -> pnlPerseverance.add(sessoes[i]);
+            switch (sessao.getGrupo()) {
+                case MARTE -> pnlMarte.add(painel);
+                case GEMEOS -> pnlS_O.add(painel);
+                case CURIOSITY -> pnlCuriosity.add(painel);
+                case PERSEVERANCE -> pnlPerseverance.add(painel);
             }
         }
 
         revalidate();
         repaint();
+    }
+
+    private void configurarBotaoAvaliacao() {
+        JButton btnAvaliacao = new JButton("Avaliar visita");
+        btnAvaliacao.addActionListener(evt -> abrirAvaliacao());
+        pnlFooter.add(btnAvaliacao);
+    }
+
+    private void abrirAvaliacao() {
+        AvaliacaoDialog dialog = new AvaliacaoDialog(this, controle, controle.listarSessoes());
+        dialog.setVisible(true);
     }
             
     @SuppressWarnings("unchecked")

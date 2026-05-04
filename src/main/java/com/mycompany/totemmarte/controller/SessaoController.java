@@ -1,19 +1,31 @@
 package com.mycompany.totemmarte.controller;
 
+import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
-import com.mycompany.totemmarte.modelo.SessaoRepositorio;
-
+import com.mycompany.totemmarte.service.SessaoService;
 import java.util.List;
 
 public class SessaoController {
 
-    private SessaoRepositorio repositorio;
+    private final SessaoService service;
 
     public SessaoController() {
-        this.repositorio = new SessaoRepositorio();
+        this(new SessaoService());
+    }
+
+    public SessaoController(SessaoService service) {
+        this.service = service;
     }
 
     public List<SessaoModelo> listarSessoes() {
-        return repositorio.listarSessoes();
+        return service.listarSessoes();
+    }
+
+    public void salvarAvaliacao(AvaliacaoModelo avaliacao) {
+        service.salvarAvaliacao(avaliacao);
+    }
+
+    public List<AvaliacaoModelo> listarAvaliacoes() {
+        return service.listarAvaliacoes();
     }
 }

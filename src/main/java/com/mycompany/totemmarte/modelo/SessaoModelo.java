@@ -9,6 +9,8 @@ package com.mycompany.totemmarte.modelo;
  * @author nana
  */
 public class SessaoModelo {
+    private final String id;
+    private final Grupo grupo;
     private final String titulo;
     private final alinhar alinhamentoTitulo;
     private final String descricao;
@@ -17,7 +19,9 @@ public class SessaoModelo {
     private final String caminhoImagemGrande;
     private final String legenda;
 
-    public SessaoModelo(String titulo, alinhar alinhamentoTitulo, String descricao, posicionar posicaoImagem, String caminhoImagem, String imagemGrande, String legenda) {
+    public SessaoModelo(String id, Grupo grupo, String titulo, alinhar alinhamentoTitulo, String descricao, posicionar posicaoImagem, String caminhoImagem, String imagemGrande, String legenda) {
+        this.id = id;
+        this.grupo = grupo;
         this.titulo = titulo;
         this.alinhamentoTitulo = alinhamentoTitulo;
         this.descricao = descricao;
@@ -26,6 +30,14 @@ public class SessaoModelo {
         //configuracoes do Jdialog
         this.caminhoImagemGrande= imagemGrande;
         this.legenda = legenda;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
     }
 
     public String getTitulo() {
@@ -56,8 +68,10 @@ public class SessaoModelo {
         return legenda;
     }
     
+    public enum Grupo {MARTE, GEMEOS, CURIOSITY, PERSEVERANCE}
+
     public enum alinhar {DIREITA, ESQUERDA}
-    
+
     public enum posicionar {DIREITA, ESQUERDA}
 
 }
