@@ -60,7 +60,7 @@ public class AvaliacaoDialog extends JDialog {
         txaMotivo.setLineWrap(true);
         txaMotivo.setWrapStyleWord(true);
 
-        painelCampos.add(new JLabel("Obra favorita"));
+        painelCampos.add(new JLabel("Tema da avaliação"));
         painelCampos.add(cmbObra);
         painelCampos.add(new JLabel("Faixa etária"));
         painelCampos.add(cmbFaixaEtaria);
@@ -87,7 +87,7 @@ public class AvaliacaoDialog extends JDialog {
         String motivo = txaMotivo.getText().trim();
 
         if (item == null || item.id().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Selecione a obra favorita.");
+            JOptionPane.showMessageDialog(this, "Selecione o tema da avaliação.");
             return;
         }
 

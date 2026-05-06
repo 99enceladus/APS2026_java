@@ -11,145 +11,145 @@ public class FakeSessaoDatabase {
         lista.add(new SessaoModelo(
                 "marte-planeta",
                 SessaoModelo.Grupo.MARTE,
-                " PLANETA MARTE",
+                "Planeta Marte",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "Marte e o quarto planeta do Sistema Solar e um dos alvos mais estudados pela exploracao espacial.",
                 SessaoModelo.posicionar.DIREITA,
                 "/1_home/imgMarte.png",
                 "/1_home/marte.png",
-                "texto legenda"
+                "Visao geral do planeta Marte."
         ));
 
         lista.add(new SessaoModelo(
                 "marte-objetivos",
                 SessaoModelo.Grupo.MARTE,
-                "OBJETIVOS ",
+                "Objetivos da exploracao",
                 SessaoModelo.alinhar.DIREITA,
-                "Texto 1",
+                "As missoes em Marte investigam clima, geologia e sinais de que o planeta ja teve condicoes para vida.",
                 SessaoModelo.posicionar.ESQUERDA,
                 "/1_home/imgSolo.jpg",
                 "/1_home/Solo.jpg",
-                "texto legenda"
+                "Detalhe do solo marciano."
         ));
 
         lista.add(new SessaoModelo(
                 "marte-rovers",
                 SessaoModelo.Grupo.MARTE,
-                " ROVERS",
+                "Rovers em Marte",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "Os rovers sao laboratorios moveis que analisam rochas, poeira e a atmosfera diretamente na superficie.",
                 SessaoModelo.posicionar.DIREITA,
                 "/1_home/imgRover.jpg",
                 "/1_home/Rover.jpg",
-                "texto legenda"
+                "Robo explorador em operacao."
         ));
 
         lista.add(new SessaoModelo(
                 "gemeos-rovers",
                 SessaoModelo.Grupo.GEMEOS,
-                " ROVERS GEMEOS",
+                "Rovers gemeos",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "Spirit e Opportunity foram enviados para estudar areas diferentes de Marte e ampliar o conhecimento do planeta.",
                 SessaoModelo.posicionar.DIREITA,
                 "/2_spirit_opportunity/imgOpportunity.jpeg",
                 "/2_spirit_opportunity/Opportunity.jpeg",
-                "texto legenda"
+                "Rover Opportunity em Marte."
         ));
 
         lista.add(new SessaoModelo(
                 "gemeos-pouso",
                 SessaoModelo.Grupo.GEMEOS,
-                "LOCAL DE POUSO ",
+                "Local de pouso",
                 SessaoModelo.alinhar.DIREITA,
-                "Texto 1",
+                "Os locais de pouso foram escolhidos por indicios geologicos importantes para a busca de agua no passado.",
                 SessaoModelo.posicionar.ESQUERDA,
                 "/2_spirit_opportunity/imgSunset.jpg",
                 "/2_spirit_opportunity/Sunset.jpg",
-                "texto legenda"
+                "Paisagem marciana ao entardecer."
         ));
 
         lista.add(new SessaoModelo(
                 "gemeos-objetivos",
                 SessaoModelo.Grupo.GEMEOS,
-                " OBJETIVOS",
+                "Objetivos da missao",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "A missao dos rovers gemeos focou em evidencias de agua e no estudo da composicao das rochas marcianas.",
                 SessaoModelo.posicionar.DIREITA,
                 "/2_spirit_opportunity/imgDustDevil.jpg",
                 "/2_spirit_opportunity/DustDevil.jpg",
-                "texto legenda"
+                "Fenomeno atmosferico em Marte."
         ));
 
         lista.add(new SessaoModelo(
                 "curiosity-rover",
                 SessaoModelo.Grupo.CURIOSITY,
-                " ROVER CURIOSITY",
+                "Rover Curiosity",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "O Curiosity e um rover de grande porte projetado para investigar habitabilidade e quimica do solo.",
                 SessaoModelo.posicionar.DIREITA,
                 "/3_curiosity/imgCuriosity.jpg",
                 "/3_curiosity/Curiosity.jpg",
-                "texto legenda"
+                "Rover Curiosity em atividade."
         ));
 
         lista.add(new SessaoModelo(
                 "curiosity-pouso",
                 SessaoModelo.Grupo.CURIOSITY,
-                "LOCAL DE POUSO ",
+                "Local de pouso",
                 SessaoModelo.alinhar.DIREITA,
-                "Texto 1",
+                "O Curiosity pousou na Cratera Gale, uma regiao com formacoes que ajudam a reconstruir o passado de Marte.",
                 SessaoModelo.posicionar.ESQUERDA,
                 "/3_curiosity/imgCartaoPostal.jpg",
                 "/3_curiosity/CartaoPostal.jpg",
-                "texto legenda"
+                "Registro da area de pouso."
         ));
 
         lista.add(new SessaoModelo(
                 "curiosity-estrutura",
                 SessaoModelo.Grupo.CURIOSITY,
-                " OBJETIVOS E ESTRUTURA ",
+                "Objetivos e estrutura",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "A estrutura do Curiosity permite carregar varios instrumentos cientificos para analises detalhadas.",
                 SessaoModelo.posicionar.DIREITA,
                 "/3_curiosity/imgMeteorito.jpg",
                 "/3_curiosity/Meteorito.jpg",
-                "texto legenda"
+                "Exemplo de rocha analisada."
         ));
 
         lista.add(new SessaoModelo(
                 "perseverance-rover",
                 SessaoModelo.Grupo.PERSEVERANCE,
-                " ROVER PERSEVERANCE",
+                "Rover Perseverance",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "O Perseverance procura sinais de vida antiga e coleta amostras para futuras missoes de retorno.",
                 SessaoModelo.posicionar.DIREITA,
                 "/4_perseverance/imgPerseverance.jpg",
                 "/4_perseverance/Perseverance.jpg",
-                "texto legenda"
+                "Rover Perseverance em deslocamento."
         ));
 
         lista.add(new SessaoModelo(
                 "perseverance-pouso",
                 SessaoModelo.Grupo.PERSEVERANCE,
-                "LOCAL DE POUSO ",
+                "Local de pouso",
                 SessaoModelo.alinhar.DIREITA,
-                "Texto 1",
+                "A cratera Jezero foi escolhida por ter indicios de um antigo delta de rio e potencial cientifico elevado.",
                 SessaoModelo.posicionar.ESQUERDA,
                 "/4_perseverance/imgCratera.png",
                 "/4_perseverance/Cratera.png",
-                "texto legenda"
+                "Mapa da regiao de pouso."
         ));
 
         lista.add(new SessaoModelo(
                 "perseverance-estrutura",
                 SessaoModelo.Grupo.PERSEVERANCE,
-                " OBJETIVOS E ESTRUTURA",
+                "Objetivos e estrutura",
                 SessaoModelo.alinhar.ESQUERDA,
-                "Texto 1",
+                "Seu conjunto de cameras e sensores permite estudar o ambiente e preparar os proximos passos da exploracao.",
                 SessaoModelo.posicionar.DIREITA,
                 "/4_perseverance/imgSoloP.jpg",
                 "/4_perseverance/SoloP.jpg",
-                "texto legenda"
+                "Detalhe do terreno marciano."
         ));
 
         return lista;
