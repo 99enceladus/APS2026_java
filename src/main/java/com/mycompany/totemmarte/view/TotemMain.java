@@ -3,9 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.totemmarte.view;
+import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
+import java.awt.FlowLayout;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import com.mycompany.totemmarte.controller.SessaoController;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import javax.swing.JButton;
 
 
@@ -20,6 +27,7 @@ public class TotemMain extends javax.swing.JFrame {
         //para colocar as sessoes
         controle= new SessaoController();
         configurarBotaoAvaliacao();
+        configurarAbaAvaliacoes();
         carregarSessoes();
 
     }
@@ -56,14 +64,83 @@ public class TotemMain extends javax.swing.JFrame {
     }
 
     private void configurarBotaoAvaliacao() {
-        JButton btnAvaliacao = new JButton("Avaliar visita");
+        pnlFooter.removeAll();
+        pnlFooter.setLayout(new FlowLayout(FlowLayout.CENTER, 16, 10));
+
+        JButton btnAvaliacao = new JButton("Adicionar avaliação");
         btnAvaliacao.addActionListener(evt -> abrirAvaliacao());
         pnlFooter.add(btnAvaliacao);
+
+        pnlFooter.revalidate();
+        pnlFooter.repaint();
     }
 
     private void abrirAvaliacao() {
         AvaliacaoDialog dialog = new AvaliacaoDialog(this, controle, controle.listarSessoes());
         dialog.setVisible(true);
+    }
+
+    private void configurarAbaAvaliacoes() {
+        btnAtualizarAvaliacoes.addActionListener(evt -> atualizarResumoAvaliacoes());
+        atualizarResumoAvaliacoes();
+    }
+
+    private void atualizarResumoAvaliacoes() {
+        List<AvaliacaoModelo> avaliacoes = controle.listarAvaliacoes();
+        int totalAvaliacoes = avaliacoes.size();
+        int[] distribuicaoEstrelas = new int[6];
+        int somaEstrelas = 0;
+        Map<String, Integer> contagemPorObra = new HashMap<>();
+
+        for (AvaliacaoModelo avaliacao : avaliacoes) {
+            int estrelas = avaliacao.getEstrelas();
+            if (estrelas >= 1 && estrelas <= 5) {
+                distribuicaoEstrelas[estrelas]++;
+                somaEstrelas += estrelas;
+            }
+
+            String tituloObra = avaliacao.getObraTitulo();
+            if (tituloObra == null || tituloObra.isBlank()) {
+                tituloObra = "Obra sem titulo";
+            }
+            contagemPorObra.merge(tituloObra, 1, Integer::sum);
+        }
+
+        double media = totalAvaliacoes == 0 ? 0.0 : (double) somaEstrelas / totalAvaliacoes;
+        lblTotalAvaliacoes.setText("Total de avaliacoes: " + totalAvaliacoes);
+        lblMediaEstrelas.setText(String.format(Locale.US, "Media geral de estrelas: %.1f", media));
+        lblDistribuicao1.setText("1 estrela: " + distribuicaoEstrelas[1]);
+        lblDistribuicao2.setText("2 estrelas: " + distribuicaoEstrelas[2]);
+        lblDistribuicao3.setText("3 estrelas: " + distribuicaoEstrelas[3]);
+        lblDistribuicao4.setText("4 estrelas: " + distribuicaoEstrelas[4]);
+        lblDistribuicao5.setText("5 estrelas: " + distribuicaoEstrelas[5]);
+        lblObrasMaisAvaliadas.setText("Obra(s) mais avaliada(s): " + montarResumoObrasMaisAvaliadas(contagemPorObra));
+    }
+
+    private String montarResumoObrasMaisAvaliadas(Map<String, Integer> contagemPorObra) {
+        if (contagemPorObra.isEmpty()) {
+            return "nenhuma avaliacao";
+        }
+
+        int maiorQuantidade = 0;
+        for (Integer quantidade : contagemPorObra.values()) {
+            if (quantidade > maiorQuantidade) {
+                maiorQuantidade = quantidade;
+            }
+        }
+
+        List<String> obrasMaisAvaliadas = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : contagemPorObra.entrySet()) {
+            if (entry.getValue() == maiorQuantidade) {
+                obrasMaisAvaliadas.add(entry.getKey());
+            }
+        }
+
+        Collections.sort(obrasMaisAvaliadas, String.CASE_INSENSITIVE_ORDER);
+        if (obrasMaisAvaliadas.size() == 1) {
+            return obrasMaisAvaliadas.get(0) + " (" + maiorQuantidade + ")";
+        }
+        return String.join(", ", obrasMaisAvaliadas) + " (" + maiorQuantidade + " cada)";
     }
             
     @SuppressWarnings("unchecked")
@@ -82,6 +159,20 @@ public class TotemMain extends javax.swing.JFrame {
         pnlCuriosity = new javax.swing.JPanel();
         spPerseverance = new javax.swing.JScrollPane();
         pnlPerseverance = new javax.swing.JPanel();
+        spAvaliacoes = new javax.swing.JScrollPane();
+        pnlAvaliacoes = new javax.swing.JPanel();
+        pnlAcoesAvaliacoes = new javax.swing.JPanel();
+        btnAtualizarAvaliacoes = new javax.swing.JButton();
+        pnlResumoAvaliacoes = new javax.swing.JPanel();
+        lblResumoTitulo = new javax.swing.JLabel();
+        lblTotalAvaliacoes = new javax.swing.JLabel();
+        lblMediaEstrelas = new javax.swing.JLabel();
+        lblDistribuicao1 = new javax.swing.JLabel();
+        lblDistribuicao2 = new javax.swing.JLabel();
+        lblDistribuicao3 = new javax.swing.JLabel();
+        lblDistribuicao4 = new javax.swing.JLabel();
+        lblDistribuicao5 = new javax.swing.JLabel();
+        lblObrasMaisAvaliadas = new javax.swing.JLabel();
         pnlFooter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -134,6 +225,54 @@ public class TotemMain extends javax.swing.JFrame {
         spPerseverance.setViewportView(pnlPerseverance);
 
         TabsGaleria.addTab("Perseverance", spPerseverance);
+
+        pnlAvaliacoes.setLayout(new java.awt.BorderLayout());
+
+        pnlAcoesAvaliacoes.setBackground(new java.awt.Color(207, 191, 164));
+        pnlAcoesAvaliacoes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 8));
+
+        btnAtualizarAvaliacoes.setText("Atualizar");
+        pnlAcoesAvaliacoes.add(btnAtualizarAvaliacoes);
+
+        pnlAvaliacoes.add(pnlAcoesAvaliacoes, java.awt.BorderLayout.PAGE_START);
+
+        pnlResumoAvaliacoes.setBackground(new java.awt.Color(207, 191, 164));
+        pnlResumoAvaliacoes.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 12, 12, 12));
+        pnlResumoAvaliacoes.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
+
+        lblResumoTitulo.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
+        lblResumoTitulo.setText("Resumo das avaliacoes");
+        pnlResumoAvaliacoes.add(lblResumoTitulo);
+
+        lblTotalAvaliacoes.setText("Total de avaliacoes: 0");
+        pnlResumoAvaliacoes.add(lblTotalAvaliacoes);
+
+        lblMediaEstrelas.setText("Media geral de estrelas: 0.0");
+        pnlResumoAvaliacoes.add(lblMediaEstrelas);
+
+        lblDistribuicao1.setText("1 estrela: 0");
+        pnlResumoAvaliacoes.add(lblDistribuicao1);
+
+        lblDistribuicao2.setText("2 estrelas: 0");
+        pnlResumoAvaliacoes.add(lblDistribuicao2);
+
+        lblDistribuicao3.setText("3 estrelas: 0");
+        pnlResumoAvaliacoes.add(lblDistribuicao3);
+
+        lblDistribuicao4.setText("4 estrelas: 0");
+        pnlResumoAvaliacoes.add(lblDistribuicao4);
+
+        lblDistribuicao5.setText("5 estrelas: 0");
+        pnlResumoAvaliacoes.add(lblDistribuicao5);
+
+        lblObrasMaisAvaliadas.setText("Obra(s) mais avaliada(s): nenhuma avaliacao");
+        pnlResumoAvaliacoes.add(lblObrasMaisAvaliadas);
+
+        pnlAvaliacoes.add(pnlResumoAvaliacoes, java.awt.BorderLayout.CENTER);
+
+        spAvaliacoes.setViewportView(pnlAvaliacoes);
+
+        TabsGaleria.addTab("Avaliações", spAvaliacoes);
 
         pnlCorpo.add(TabsGaleria, java.awt.BorderLayout.CENTER);
         TabsGaleria.getAccessibleContext().setAccessibleName("home");
@@ -192,14 +331,28 @@ public class TotemMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane TabsGaleria;
+    private javax.swing.JButton btnAtualizarAvaliacoes;
+    private javax.swing.JLabel lblDistribuicao1;
+    private javax.swing.JLabel lblDistribuicao2;
+    private javax.swing.JLabel lblDistribuicao3;
+    private javax.swing.JLabel lblDistribuicao4;
+    private javax.swing.JLabel lblDistribuicao5;
+    private javax.swing.JLabel lblMediaEstrelas;
+    private javax.swing.JLabel lblObrasMaisAvaliadas;
+    private javax.swing.JLabel lblResumoTitulo;
+    private javax.swing.JLabel lblTotalAvaliacoes;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlAcoesAvaliacoes;
+    private javax.swing.JPanel pnlAvaliacoes;
     private javax.swing.JPanel pnlCorpo;
     private javax.swing.JPanel pnlCuriosity;
     private javax.swing.JPanel pnlFooter;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JPanel pnlMarte;
     private javax.swing.JPanel pnlPerseverance;
+    private javax.swing.JPanel pnlResumoAvaliacoes;
     private javax.swing.JPanel pnlS_O;
+    private javax.swing.JScrollPane spAvaliacoes;
     private javax.swing.JScrollPane spCuriosity;
     private javax.swing.JScrollPane spMarte;
     private javax.swing.JScrollPane spPerseverance;
