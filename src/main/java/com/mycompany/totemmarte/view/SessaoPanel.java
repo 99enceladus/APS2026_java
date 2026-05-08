@@ -98,14 +98,17 @@ public class SessaoPanel extends javax.swing.JPanel {
         txDescricao = new javax.swing.JTextPane();
 
         setBackground(new java.awt.Color(237, 231, 222));
+        setPreferredSize(new java.awt.Dimension(1200, 500));
         setLayout(new java.awt.BorderLayout());
 
-        lblTitulo.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
+        lblTitulo.setFont(new java.awt.Font("Serif", 1, 30)); // NOI18N
         lblTitulo.setText("titulo");
-        lblTitulo.setPreferredSize(new java.awt.Dimension(42, 50));
+        lblTitulo.setMaximumSize(new java.awt.Dimension(60, 26));
+        lblTitulo.setPreferredSize(new java.awt.Dimension(42, 70));
         add(lblTitulo, java.awt.BorderLayout.PAGE_START);
 
-        pnlImagem.setPreferredSize(new java.awt.Dimension(220, 220));
+        pnlImagem.setBackground(new java.awt.Color(0, 0, 0));
+        pnlImagem.setPreferredSize(new java.awt.Dimension(500, 500));
         pnlImagem.setLayout(new java.awt.BorderLayout());
         pnlImagem.add(lblImagem, java.awt.BorderLayout.CENTER);
 

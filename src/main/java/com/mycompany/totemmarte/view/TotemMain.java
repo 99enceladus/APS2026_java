@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.totemmarte.view;
+import com.mycompany.totemmarte.UI.TabsUI;
 import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
 import java.awt.FlowLayout;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
@@ -24,7 +25,9 @@ public class TotemMain extends javax.swing.JFrame {
     public TotemMain() {
         initComponents();
         configurarJanela();
+        
         //para colocar as sessoes
+        TabsUI.aplicarEstilo(TabsGaleria);
         controle= new SessaoController();
         configurarBotaoAvaliacao();
         configurarAbaAvaliacoes();
@@ -188,17 +191,17 @@ public class TotemMain extends javax.swing.JFrame {
         pnlHeader.setLayout(pnlHeaderLayout);
         pnlHeaderLayout.setHorizontalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlHeaderLayout.createSequentialGroup()
-                .addGap(68, 68, 68)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(466, Short.MAX_VALUE)
                 .addComponent(lblTitulo)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addGap(413, 413, 413))
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHeaderLayout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+            .addGroup(pnlHeaderLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addComponent(lblTitulo)
-                .addGap(46, 46, 46))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
@@ -229,7 +232,7 @@ public class TotemMain extends javax.swing.JFrame {
         pnlAvaliacoes.setLayout(new java.awt.BorderLayout());
 
         pnlAcoesAvaliacoes.setBackground(new java.awt.Color(207, 191, 164));
-        pnlAcoesAvaliacoes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 12, 8));
+        pnlAcoesAvaliacoes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         btnAtualizarAvaliacoes.setText("Atualizar");
         pnlAcoesAvaliacoes.add(btnAtualizarAvaliacoes);
@@ -237,8 +240,7 @@ public class TotemMain extends javax.swing.JFrame {
         pnlAvaliacoes.add(pnlAcoesAvaliacoes, java.awt.BorderLayout.PAGE_START);
 
         pnlResumoAvaliacoes.setBackground(new java.awt.Color(207, 191, 164));
-        pnlResumoAvaliacoes.setBorder(javax.swing.BorderFactory.createEmptyBorder(12, 12, 12, 12));
-        pnlResumoAvaliacoes.setLayout(new java.awt.GridLayout(0, 1, 0, 8));
+        pnlResumoAvaliacoes.setLayout(new java.awt.GridLayout(0, 1));
 
         lblResumoTitulo.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lblResumoTitulo.setText("Resumo das avaliacoes");
@@ -287,7 +289,7 @@ public class TotemMain extends javax.swing.JFrame {
         pnlFooter.setLayout(pnlFooterLayout);
         pnlFooterLayout.setHorizontalGroup(
             pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGap(0, 1280, Short.MAX_VALUE)
         );
         pnlFooterLayout.setVerticalGroup(
             pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,7 +327,7 @@ public class TotemMain extends javax.swing.JFrame {
     }
     
     private void configurarJanela (){
-        setSize(550, 777);
+        setSize(1280, 800);
         setLocationRelativeTo(null);
     }
 
@@ -340,8 +342,8 @@ public class TotemMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblMediaEstrelas;
     private javax.swing.JLabel lblObrasMaisAvaliadas;
     private javax.swing.JLabel lblResumoTitulo;
-    private javax.swing.JLabel lblTotalAvaliacoes;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JLabel lblTotalAvaliacoes;
     private javax.swing.JPanel pnlAcoesAvaliacoes;
     private javax.swing.JPanel pnlAvaliacoes;
     private javax.swing.JPanel pnlCorpo;

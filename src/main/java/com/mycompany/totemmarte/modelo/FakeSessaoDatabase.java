@@ -15,7 +15,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.alinhar.ESQUERDA,
                 "Marte e o quarto planeta do Sistema Solar e um dos alvos mais estudados pela exploracao espacial.",
                 SessaoModelo.posicionar.DIREITA,
-                "/1_home/imgMarte.png",
+                "/1_home/marte.png",
                 "/1_home/marte.png",
                 "Visao geral do planeta Marte."
         ));
