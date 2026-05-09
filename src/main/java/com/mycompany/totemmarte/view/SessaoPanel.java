@@ -2,16 +2,21 @@
 package com.mycompany.totemmarte.view;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
         
 public class SessaoPanel extends javax.swing.JPanel {
     
     private SessaoModelo modelo;
+    private javax.swing.JLabel lblOverlay;
     
     public SessaoPanel() {
         initComponents();
         
         configurarClique();
+        criarOverlay();
+        pnlImagem.setLayout(new javax.swing.OverlayLayout(pnlImagem));
     }
 
     public void configurar(SessaoModelo modelo) {
@@ -34,13 +39,31 @@ public class SessaoPanel extends javax.swing.JPanel {
     
     private void configurarClique() {
 
-    lblImagem.addMouseListener(new java.awt.event.MouseAdapter() {
+    lblImagem.addMouseListener(
+        new MouseAdapter() {
+
         @Override
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            abrirDialog(); // 🔥 chama outro método da mesma classe
+        public void mouseClicked(
+                MouseEvent evt) {
+
+            abrirDialog();
+        }
+
+        @Override
+        public void mouseEntered(
+                MouseEvent evt) {
+
+            lblOverlay.setVisible(true);
+        }
+
+        @Override
+        public void mouseExited(
+                MouseEvent evt) {
+
+            lblOverlay.setVisible(false);
         }
     });
-    }
+}
     
     private void abrirDialog() {
 
@@ -52,8 +75,9 @@ public class SessaoPanel extends javax.swing.JPanel {
     dialog.configurar(modelo);
 
     dialog.pack();
-    dialog.setLocationRelativeTo(this);
+    dialog.setLocationRelativeTo(null);
     dialog.setVisible(true);
+    
     }
    private void alinhamento() {
 
@@ -119,7 +143,7 @@ public class SessaoPanel extends javax.swing.JPanel {
 
         txDescricao.setEditable(false);
         txDescricao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 231, 222), 10));
-        txDescricao.setFont(new java.awt.Font("sansserif", 0, 15)); // NOI18N
+        txDescricao.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         txDescricao.setOpaque(false);
         pnlDescricao.add(txDescricao, java.awt.BorderLayout.CENTER);
 
@@ -134,4 +158,54 @@ public class SessaoPanel extends javax.swing.JPanel {
     private javax.swing.JPanel pnlImagem;
     private javax.swing.JTextPane txDescricao;
     // End of variables declaration//GEN-END:variables
+
+    private void criarOverlay() {
+
+    pnlImagem.setLayout(
+        new javax.swing.OverlayLayout(pnlImagem)
+    );
+
+    lblOverlay = new javax.swing.JLabel(
+        "TOQUE PARA AMPLIAR",
+        javax.swing.SwingConstants.CENTER
+    );
+
+    lblOverlay.setFont(
+        new java.awt.Font(
+            "SansSerif",
+            java.awt.Font.BOLD,
+            28
+        )
+    );
+
+    lblOverlay.setForeground(
+        java.awt.Color.WHITE
+    );
+
+    lblOverlay.setBackground(
+        new java.awt.Color(0, 0, 0, 160)
+    );
+
+    lblOverlay.setOpaque(true);
+
+    lblOverlay.setVisible(false);
+
+    // ocupa toda área
+    lblOverlay.setAlignmentX(0.5f);
+    lblOverlay.setAlignmentY(0.5f);
+
+    lblImagem.setAlignmentX(0.5f);
+    lblImagem.setAlignmentY(0.5f);
+
+    lblOverlay.setMaximumSize(
+        new java.awt.Dimension(
+            Integer.MAX_VALUE,
+            Integer.MAX_VALUE
+        )
+    );
+
+    pnlImagem.add(lblOverlay);
+    pnlImagem.add(lblImagem);
+}
+    
 }

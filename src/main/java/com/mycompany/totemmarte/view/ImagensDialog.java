@@ -11,6 +11,8 @@ public class ImagensDialog extends javax.swing.JDialog {
     public ImagensDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        setResizable(false);
     }
 
     public void configurar(SessaoModelo modelo) {
@@ -30,14 +32,17 @@ public class ImagensDialog extends javax.swing.JDialog {
         lblImagemGrande = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setModal(true);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         pnlLegenda.setBackground(new java.awt.Color(0, 0, 0));
         pnlLegenda.setLayout(new java.awt.BorderLayout());
 
         txpLegenda.setEditable(false);
         txpLegenda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 10));
-        txpLegenda.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        txpLegenda.setFont(new java.awt.Font("DialogInput", 1, 18)); // NOI18N
         txpLegenda.setForeground(new java.awt.Color(255, 255, 255));
+        txpLegenda.setText("18.01.19");
         txpLegenda.setOpaque(false);
         txpLegenda.setPreferredSize(new java.awt.Dimension(62, 100));
         pnlLegenda.add(txpLegenda, java.awt.BorderLayout.PAGE_START);

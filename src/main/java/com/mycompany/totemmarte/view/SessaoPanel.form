@@ -94,7 +94,7 @@
               </Border>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="sansserif" size="15" style="0"/>
+              <Font name="DialogInput" size="18" style="1"/>
             </Property>
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>

@@ -23,6 +23,8 @@ public class FormDialog extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlHeader = new javax.swing.JPanel();
+        pnlFooter = new javax.swing.JPanel();
+        btnEnviar = new javax.swing.JButton();
         pnlCorpo = new javax.swing.JPanel();
         lblPergunta1 = new javax.swing.JLabel();
         cmbSessao = new javax.swing.JComboBox<>();
@@ -54,6 +56,29 @@ public class FormDialog extends javax.swing.JDialog {
         );
 
         getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
+
+        pnlFooter.setPreferredSize(new java.awt.Dimension(756, 60));
+
+        btnEnviar.setText("Enviar");
+
+        javax.swing.GroupLayout pnlFooterLayout = new javax.swing.GroupLayout(pnlFooter);
+        pnlFooter.setLayout(pnlFooterLayout);
+        pnlFooterLayout.setHorizontalGroup(
+            pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLayout.createSequentialGroup()
+                .addGap(299, 299, 299)
+                .addComponent(btnEnviar)
+                .addContainerGap(385, Short.MAX_VALUE))
+        );
+        pnlFooterLayout.setVerticalGroup(
+            pnlFooterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFooterLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnEnviar)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(pnlFooter, java.awt.BorderLayout.PAGE_END);
 
         pnlCorpo.setLayout(new java.awt.GridLayout(10, 1));
 
@@ -133,6 +158,7 @@ public class FormDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEnviar;
     private javax.swing.JComboBox<String> cmbApresentacao;
     private javax.swing.JComboBox<String> cmbFxEtaria;
     private javax.swing.JComboBox<String> cmbNota;
@@ -143,6 +169,7 @@ public class FormDialog extends javax.swing.JDialog {
     private javax.swing.JLabel lblPergunta4;
     private javax.swing.JLabel lblPergunta5;
     private javax.swing.JPanel pnlCorpo;
+    private javax.swing.JPanel pnlFooter;
     private javax.swing.JPanel pnlHeader;
     private javax.swing.JScrollPane scpMotivo;
     private javax.swing.JTextArea txaMotivo;
