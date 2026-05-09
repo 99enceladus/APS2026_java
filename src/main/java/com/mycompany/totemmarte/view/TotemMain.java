@@ -5,31 +5,28 @@
 package com.mycompany.totemmarte.view;
 import com.mycompany.totemmarte.UI.TabsUI;
 import com.mycompany.totemmarte.UI.Canva;
-import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import com.mycompany.totemmarte.controller.SessaoController;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import javax.swing.JButton;
 
 
 
 public class TotemMain extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TotemMain.class.getName());
     private final SessaoController controle;
-   
+    private final AvaliacaoResumoPanel resumoPanel;
+
     public TotemMain() {
         initComponents();
         configurarFrame();
-        
+
         //para colocar as sessoes
         controle= new SessaoController();
+        resumoPanel = new AvaliacaoResumoPanel();
         configurarBotaoAvaliacao();
         configurarAbaAvaliacoes();
         carregarSessoes();
@@ -127,73 +124,27 @@ public class TotemMain extends javax.swing.JFrame {
     }
 
     private void abrirAvaliacao() {
-        AvaliacaoDialog dialog = new AvaliacaoDialog(this, controle, controle.listarSessoes());
+        FormDialog dialog = new FormDialog(this, controle, controle.listarSessoes());
         dialog.setVisible(true);
+        if (dialog.isAvaliacaoEnviada()) {
+            atualizarResumoAvaliacoes();
+        }
     }
 
     private void configurarAbaAvaliacoes() {
+        pnlResumoAvaliacoes.removeAll();
+        pnlResumoAvaliacoes.setLayout(new BorderLayout());
+        pnlResumoAvaliacoes.add(resumoPanel, BorderLayout.CENTER);
         btnAtualizarAvaliacoes.addActionListener(evt -> atualizarResumoAvaliacoes());
         atualizarResumoAvaliacoes();
     }
 
     private void atualizarResumoAvaliacoes() {
-        List<AvaliacaoModelo> avaliacoes = controle.listarAvaliacoes();
-        int totalAvaliacoes = avaliacoes.size();
-        int[] distribuicaoEstrelas = new int[6];
-        int somaEstrelas = 0;
-        Map<String, Integer> contagemPorObra = new HashMap<>();
-
-        for (AvaliacaoModelo avaliacao : avaliacoes) {
-            int estrelas = avaliacao.getEstrelas();
-            if (estrelas >= 1 && estrelas <= 5) {
-                distribuicaoEstrelas[estrelas]++;
-                somaEstrelas += estrelas;
-            }
-
-            String tituloObra = avaliacao.getObraTitulo();
-            if (tituloObra == null || tituloObra.isBlank()) {
-                tituloObra = "Obra sem titulo";
-            }
-            contagemPorObra.merge(tituloObra, 1, Integer::sum);
-        }
-
-        double media = totalAvaliacoes == 0 ? 0.0 : (double) somaEstrelas / totalAvaliacoes;
-        lblTotalAvaliacoes.setText("Total de avaliacoes: " + totalAvaliacoes);
-        lblMediaEstrelas.setText(String.format(Locale.US, "Media geral de estrelas: %.1f", media));
-        lblDistribuicao1.setText("1 estrela: " + distribuicaoEstrelas[1]);
-        lblDistribuicao2.setText("2 estrelas: " + distribuicaoEstrelas[2]);
-        lblDistribuicao3.setText("3 estrelas: " + distribuicaoEstrelas[3]);
-        lblDistribuicao4.setText("4 estrelas: " + distribuicaoEstrelas[4]);
-        lblDistribuicao5.setText("5 estrelas: " + distribuicaoEstrelas[5]);
-        lblObrasMaisAvaliadas.setText("Obra(s) mais avaliada(s): " + montarResumoObrasMaisAvaliadas(contagemPorObra));
+        resumoPanel.atualizarResumo(controle.listarAvaliacoes());
+        pnlResumoAvaliacoes.revalidate();
+        pnlResumoAvaliacoes.repaint();
     }
 
-    private String montarResumoObrasMaisAvaliadas(Map<String, Integer> contagemPorObra) {
-        if (contagemPorObra.isEmpty()) {
-            return "nenhuma avaliacao";
-        }
-
-        int maiorQuantidade = 0;
-        for (Integer quantidade : contagemPorObra.values()) {
-            if (quantidade > maiorQuantidade) {
-                maiorQuantidade = quantidade;
-            }
-        }
-
-        List<String> obrasMaisAvaliadas = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : contagemPorObra.entrySet()) {
-            if (entry.getValue() == maiorQuantidade) {
-                obrasMaisAvaliadas.add(entry.getKey());
-            }
-        }
-
-        Collections.sort(obrasMaisAvaliadas, String.CASE_INSENSITIVE_ORDER);
-        if (obrasMaisAvaliadas.size() == 1) {
-            return obrasMaisAvaliadas.get(0) + " (" + maiorQuantidade + ")";
-        }
-        return String.join(", ", obrasMaisAvaliadas) + " (" + maiorQuantidade + " cada)";
-    }
-            
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

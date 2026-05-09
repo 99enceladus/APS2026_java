@@ -30,6 +30,10 @@ public class SessaoService {
             throw new IllegalArgumentException("Selecione a faixa etária.");
         }
 
+        if (avaliacao.getApresentacaoFavorita() == null || avaliacao.getApresentacaoFavorita().isBlank()) {
+            throw new IllegalArgumentException("Selecione a apresentação favorita.");
+        }
+
         if (avaliacao.getEstrelas() < 1 || avaliacao.getEstrelas() > 5) {
             throw new IllegalArgumentException("A nota deve estar entre 1 e 5.");
         }

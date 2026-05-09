@@ -1,16 +1,158 @@
 
 package com.mycompany.totemmarte.view;
 
+import com.mycompany.totemmarte.controller.SessaoController;
+import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
+import com.mycompany.totemmarte.modelo.SessaoModelo;
+import java.awt.Color;
+import java.awt.Frame;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 public class FormDialog extends javax.swing.JDialog {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormDialog.class.getName());
+    private static final String OPCAO_PADRAO = "Selecione";
+    private static final String[] FAIXAS_ETARIAS = {
+        OPCAO_PADRAO,
+        "Até 12 anos",
+        "13 a 17 anos",
+        "18 a 25 anos",
+        "26 a 40 anos",
+        "41 a 60 anos",
+        "61+"
+    };
+
+    private final SessaoController controller;
+    private final List<SessaoModelo> sessoes;
+    private boolean avaliacaoEnviada;
 
     /**
      * Creates new form FormDialog
      */
     public FormDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        this(parent, criarControllerPadrao());
+    }
+
+    private static SessaoController criarControllerPadrao() {
+        return new SessaoController();
+    }
+
+    private FormDialog(Frame parent, SessaoController controller) {
+        this(parent, controller, controller.listarSessoes());
+    }
+
+    public FormDialog(Frame parent, SessaoController controller, List<SessaoModelo> sessoes) {
+        super(parent, true);
+        this.controller = controller;
+        this.sessoes = List.copyOf(sessoes);
         initComponents();
+        configurarTela(parent);
+        carregarCombos();
+        registrarEventos();
+    }
+
+    public boolean isAvaliacaoEnviada() {
+        return avaliacaoEnviada;
+    }
+
+    private void configurarTela(Frame parent) {
+        setTitle("Avaliar visita");
+        getContentPane().setBackground(new Color(237, 231, 222));
+        pnlCorpo.setBackground(new Color(237, 231, 222));
+        pnlFooter.setBackground(new Color(237, 231, 222));
+        btnEnviar.setText("Enviar avaliação");
+        txaMotivo.setLineWrap(true);
+        txaMotivo.setWrapStyleWord(true);
+        setLocationRelativeTo(parent);
+    }
+
+    private void carregarCombos() {
+        cmbFxEtaria.setModel(new DefaultComboBoxModel<>(FAIXAS_ETARIAS));
+        cmbNota.setModel(new DefaultComboBoxModel<>(new String[]{OPCAO_PADRAO, "1", "2", "3", "4", "5"}));
+        cmbSessao.setModel(new DefaultComboBoxModel<>(montarOpcoesSessoes()));
+        cmbApresentacao.setModel(new DefaultComboBoxModel<>(montarOpcoesSessoes()));
+    }
+
+    private String[] montarOpcoesSessoes() {
+        String[] opcoes = new String[sessoes.size() + 1];
+        opcoes[0] = OPCAO_PADRAO;
+        for (int i = 0; i < sessoes.size(); i++) {
+            opcoes[i + 1] = sessoes.get(i).getTitulo().trim();
+        }
+        return opcoes;
+    }
+
+    private void registrarEventos() {
+        btnEnviar.addActionListener(evt -> salvarFormulario());
+    }
+
+    private void salvarFormulario() {
+        SessaoModelo sessaoSelecionada = obterSessaoSelecionada(cmbSessao.getSelectedIndex());
+        String faixaEtaria = (String) cmbFxEtaria.getSelectedItem();
+        String apresentacaoFavorita = obterTituloSelecionado(cmbApresentacao);
+        Integer nota = obterNotaSelecionada();
+        String motivo = txaMotivo.getText().trim();
+
+        if (sessaoSelecionada == null) {
+            JOptionPane.showMessageDialog(this, "Selecione uma sessão da galeria.");
+            return;
+        }
+
+        if (faixaEtaria == null || OPCAO_PADRAO.equals(faixaEtaria)) {
+            JOptionPane.showMessageDialog(this, "Selecione a faixa etária.");
+            return;
+        }
+
+        if (apresentacaoFavorita == null) {
+            JOptionPane.showMessageDialog(this, "Selecione a apresentação favorita.");
+            return;
+        }
+
+        if (nota == null) {
+            JOptionPane.showMessageDialog(this, "Selecione a nota da avaliação.");
+            return;
+        }
+
+        try {
+            controller.salvarAvaliacao(new AvaliacaoModelo(
+                    sessaoSelecionada.getId(),
+                    sessaoSelecionada.getTitulo().trim(),
+                    faixaEtaria,
+                    apresentacaoFavorita,
+                    motivo,
+                    nota
+            ));
+            avaliacaoEnviada = true;
+            JOptionPane.showMessageDialog(this, "Avaliação enviada com sucesso.");
+            dispose();
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
+
+    private SessaoModelo obterSessaoSelecionada(int selectedIndex) {
+        if (selectedIndex <= 0) {
+            return null;
+        }
+        return sessoes.get(selectedIndex - 1);
+    }
+
+    private String obterTituloSelecionado(javax.swing.JComboBox<String> comboBox) {
+        Object selectedItem = comboBox.getSelectedItem();
+        if (!(selectedItem instanceof String titulo) || OPCAO_PADRAO.equals(titulo)) {
+            return null;
+        }
+        return titulo;
+    }
+
+    private Integer obterNotaSelecionada() {
+        String notaSelecionada = obterTituloSelecionado(cmbNota);
+        if (notaSelecionada == null) {
+            return null;
+        }
+        return Integer.valueOf(notaSelecionada);
     }
 
     /**
