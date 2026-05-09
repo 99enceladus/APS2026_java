@@ -1,0 +1,16 @@
+
+# NetBeans / Java
+
+nbproject/private/
+build/
+dist/
+nbuild/
+ndist/
+.nb-gradle/
+target/
+
+# Logs
+*.log
+
+# Sistema
+.DS_Store
