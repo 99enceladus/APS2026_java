@@ -17,10 +17,14 @@ public class SessaoRepositorio {
         this.bancoAvaliacao = bancoAvaliacao;
     }
 
+    public List<SessaoModelo.Grupo> listarGrupos() {
+        return banco.listarGrupos();
+    }
+    
     public List<SessaoModelo> listarSessoes() {
         return banco.listarSessoes();
     }
-
+    
     public void salvarAvaliacao(AvaliacaoModelo avaliacao) {
         bancoAvaliacao.salvar(avaliacao);
     }

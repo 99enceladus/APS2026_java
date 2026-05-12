@@ -6,7 +6,10 @@ import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import java.awt.Color;
 import java.awt.Frame;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -71,10 +74,22 @@ public class FormDialog extends javax.swing.JDialog {
     private void carregarCombos() {
         cmbFxEtaria.setModel(new DefaultComboBoxModel<>(FAIXAS_ETARIAS));
         cmbNota.setModel(new DefaultComboBoxModel<>(new String[]{OPCAO_PADRAO, "1", "2", "3", "4", "5"}));
-        cmbSessao.setModel(new DefaultComboBoxModel<>(montarOpcoesSessoes()));
+        cmbSessao.setModel(new DefaultComboBoxModel<>(this.montarGrupos()));
         cmbApresentacao.setModel(new DefaultComboBoxModel<>(montarOpcoesSessoes()));
     }
 
+    private String[] montarGrupos() {
+        String[] grupos = new String[this.controller.listarGrupos().size() + 1];
+        
+        grupos[0] = "MARTE";
+        
+        for (int i = 0; i < this.controller.listarGrupos().size(); i++) {
+            grupos[i + 1] = this.controller.listarGrupos().get(i).name();
+        }
+        
+        return grupos;
+    }
+    
     private String[] montarOpcoesSessoes() {
         String[] opcoes = new String[sessoes.size() + 1];
         opcoes[0] = OPCAO_PADRAO;
@@ -182,6 +197,7 @@ public class FormDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(237, 231, 222));
+        setPreferredSize(new java.awt.Dimension(756, 800));
 
         pnlHeader.setBackground(new java.awt.Color(0, 0, 0));
         pnlHeader.setPreferredSize(new java.awt.Dimension(580, 50));
@@ -217,7 +233,7 @@ public class FormDialog extends javax.swing.JDialog {
             .addGroup(pnlFooterLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(btnEnviar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlFooter, java.awt.BorderLayout.PAGE_END);

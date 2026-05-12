@@ -21,6 +21,10 @@ public class SessaoController {
         return service.listarSessoes();
     }
 
+    public List<SessaoModelo.Grupo> listarGrupos(){
+        return service.listarGrupos();
+    }
+    
     public void salvarAvaliacao(AvaliacaoModelo avaliacao) {
         service.salvarAvaliacao(avaliacao);
     }

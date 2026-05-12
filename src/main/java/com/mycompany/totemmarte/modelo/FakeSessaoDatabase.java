@@ -157,4 +157,8 @@ public class FakeSessaoDatabase {
 
         return lista;
     }
+    
+    public List<SessaoModelo.Grupo> listarGrupos() {
+        return List.of(SessaoModelo.Grupo.values());
+    }
 }

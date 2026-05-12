@@ -21,6 +21,10 @@ public class SessaoService {
         return repositorio.listarSessoes();
     }
 
+    public List<SessaoModelo.Grupo> listarGrupos() {
+        return repositorio.listarGrupos();
+    }
+    
     public void salvarAvaliacao(AvaliacaoModelo avaliacao) {
         if (avaliacao.getObraId() == null || avaliacao.getObraId().isBlank()) {
             throw new IllegalArgumentException("Selecione uma obra.");
