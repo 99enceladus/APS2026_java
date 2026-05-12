@@ -1,17 +1,15 @@
-
 package com.mycompany.totemmarte.view;
+
+import java.awt.Color;
+import java.awt.Frame;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 import com.mycompany.totemmarte.controller.SessaoController;
 import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
-import java.awt.Color;
-import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 public class FormDialog extends javax.swing.JDialog {
 
@@ -29,6 +27,7 @@ public class FormDialog extends javax.swing.JDialog {
 
     private final SessaoController controller;
     private final List<SessaoModelo> sessoes;
+    private final List<SessaoModelo.Grupo> grupos;
     private boolean avaliacaoEnviada;
 
     /**
@@ -43,13 +42,14 @@ public class FormDialog extends javax.swing.JDialog {
     }
 
     private FormDialog(Frame parent, SessaoController controller) {
-        this(parent, controller, controller.listarSessoes());
+        this(parent, controller, controller.listarSessoes(), controller.listarGrupos());
     }
 
-    public FormDialog(Frame parent, SessaoController controller, List<SessaoModelo> sessoes) {
+    public FormDialog(Frame parent, SessaoController controller, List<SessaoModelo> sessoes, List<SessaoModelo.Grupo> grupos) {
         super(parent, true);
         this.controller = controller;
         this.sessoes = List.copyOf(sessoes);
+        this.grupos = List.copyOf(grupos);
         initComponents();
         configurarTela(parent);
         carregarCombos();
@@ -79,12 +79,10 @@ public class FormDialog extends javax.swing.JDialog {
     }
 
     private String[] montarGrupos() {
-        String[] grupos = new String[this.controller.listarGrupos().size() + 1];
-        
-        grupos[0] = "MARTE";
-        
-        for (int i = 0; i < this.controller.listarGrupos().size(); i++) {
-            grupos[i + 1] = this.controller.listarGrupos().get(i).name();
+        String[] grupos = new String[this.grupos.size() + 1];
+        grupos[0] = OPCAO_PADRAO;
+        for (int i = 0; i < this.grupos.size(); i++) {
+            grupos[i + 1] = this.grupos.get(i).name();
         }
         
         return grupos;

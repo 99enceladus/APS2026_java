@@ -8,6 +8,6 @@ import java.util.List;
 public class AvaliacaoDialog extends FormDialog {
 
     public AvaliacaoDialog(Frame parent, SessaoController controller, List<SessaoModelo> sessoes) {
-        super(parent, controller, sessoes);
+        super(parent, controller, sessoes, controller.listarGrupos());
     }
 }
