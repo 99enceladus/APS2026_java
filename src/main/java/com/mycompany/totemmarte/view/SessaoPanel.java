@@ -142,7 +142,7 @@ public class SessaoPanel extends javax.swing.JPanel {
         pnlDescricao.setLayout(new java.awt.BorderLayout());
 
         txDescricao.setEditable(false);
-        txDescricao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 231, 222), 10));
+        txDescricao.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(237, 231, 222), 20));
         txDescricao.setFont(new java.awt.Font("DialogInput", 1, 22)); // NOI18N
         txDescricao.setOpaque(false);
         pnlDescricao.add(txDescricao, java.awt.BorderLayout.CENTER);
