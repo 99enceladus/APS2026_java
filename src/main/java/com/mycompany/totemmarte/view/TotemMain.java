@@ -127,7 +127,7 @@ public class TotemMain extends javax.swing.JFrame {
     }
 
     private void abrirAvaliacao() {
-        FormDialog dialog = new FormDialog(this, controle, controle.listarSessoes());
+        FormDialog dialog = new FormDialog(this, controle, controle.listarSessoes(), controle.listarGrupos());
         dialog.setVisible(true);
         if (dialog.isAvaliacaoEnviada()) {
             atualizarResumoAvaliacoes();
