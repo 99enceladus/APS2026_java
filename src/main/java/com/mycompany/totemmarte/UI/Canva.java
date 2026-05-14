@@ -20,6 +20,7 @@ public class Canva extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
+        System.out.println(getWidth() + " x " + getHeight());
         super.paintComponent(g);
 
         g.drawImage(background, 0, 0,
