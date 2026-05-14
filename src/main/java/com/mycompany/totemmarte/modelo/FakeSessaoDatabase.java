@@ -18,7 +18,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/1_home/imgMarte.png",
                 "/1_home/marte.png",
-                "   -Marte surge silencioso no vazio do espaço, com suas vastas planícies avermelhadas e tempestades de poeira revelando a imponência árida do planeta vermelho."
+                "   -Marte surge silencioso no vazio do espaço, com vastas planícies avermelhadas e tempestades de poeira revelando sua imponência árida. -Mosaico terminado em 1980 pela NASA"
         ));
 
         lista.add(new SessaoModelo(
@@ -31,7 +31,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.ESQUERDA,
                 "/1_home/imgSolo.jpg",
                 "/1_home/Solo.jpg",
-                "Detalhe do solo marciano."
+                "   -Silêncio absoluto… exceto pelo som da exploração humana ecoando em outro mundo. -22 de março de 2020 por Curiosity"
         ));
 
         lista.add(new SessaoModelo(
@@ -44,7 +44,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/1_home/imgRover.jpg",
                 "/1_home/Rover.jpg",
-                "Robo explorador em operacao."
+                "   -Pequenos rastros na poeira marcando o início da presença humana além da Terra. -5 de julho de 1997 por sojourner"
         ));
 
         lista.add(new SessaoModelo(
@@ -56,7 +56,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/2_spirit_opportunity/imgOpportunity.jpeg",
                 "/2_spirit_opportunity/Opportunity.jpeg",
-                "Rover Opportunity em Marte."
+                "   Um registro técnico de rotina, o rover, seus painéis e a poeira constante de Marte. -24 de março de 2014 por Opportunity"
         ));
 
         lista.add(new SessaoModelo(
@@ -68,7 +68,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.ESQUERDA,
                 "/2_spirit_opportunity/imgSunset.jpg",
                 "/2_spirit_opportunity/Sunset.jpg",
-                "Paisagem marciana ao entardecer."
+                "   Um pequeno ponto azul no horizonte, um lembrete silencioso de casa em meio à vastidão alienígena. -31 de janeiro de 2014 por Spirit."
         ));
 
         lista.add(new SessaoModelo(
@@ -80,7 +80,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/2_spirit_opportunity/imgDustDevil.jpg",
                 "/2_spirit_opportunity/DustDevil.jpg",
-                "Fenomeno atmosferico em Marte."
+                "   Marcas de rodas seguem encosta abaixo enquanto um redemoinho cruza o horizonte, levantando poeira fina. -31 de março de 2016 por Opportunity"
         ));
 
         lista.add(new SessaoModelo(
@@ -92,7 +92,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/3_curiosity/imgCuriosity.jpg",
                 "/3_curiosity/Curiosity.jpg",
-                "Rover Curiosity em atividade."
+                "   Uma pausa no trajeto, o rover documenta a si mesmo entre rochas e poeira, com o horizonte suavemente encoberto. -15 de junho de 2018 por Curiosity"
         ));
 
         lista.add(new SessaoModelo(
@@ -104,7 +104,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.ESQUERDA,
                 "/3_curiosity/imgCartaoPostal.jpg",
                 "/3_curiosity/CartaoPostal.jpg",
-                "Registro da area de pouso."
+                "   Uma mistura de duas fotos mostra o contraste maravilhoso do céu de marte, registrada perto de seu local de pouso. - 18 de novembro de 2025 por Curiosity"
         ));
 
         lista.add(new SessaoModelo(
@@ -116,7 +116,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/3_curiosity/imgMeteorito.jpg",
                 "/3_curiosity/Meteorito.jpg",
-                "Exemplo de rocha analisada."
+                "   Metal exposto e marcado por cavidades, um fragmento de meteorito fascinante. -25 de maio de 2014 por Curiosity"
         ));
 
         lista.add(new SessaoModelo(
@@ -128,7 +128,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/4_perseverance/imgPerseverance.jpg",
                 "/4_perseverance/Perseverance.jpg",
-                "Rover Perseverance em deslocamento."
+                "   Um registro pré voo, o rover e seu pequeno helicóptero dividem o mesmo enquadramento no terreno aberto. -6 de abril de 2021 por Perseverance."
         ));
 
         lista.add(new SessaoModelo(
@@ -140,7 +140,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.ESQUERDA,
                 "/4_perseverance/imgCratera.png",
                 "/4_perseverance/Cratera.png",
-                "Mapa da regiao de pouso."
+                "   Uma elevação isolada interrompe a planície, camadas de sedimento possívelmente indicativas de um delta de rio. -22 de fevereiro de 2023 por Perseverance"
         ));
 
         lista.add(new SessaoModelo(
@@ -152,7 +152,7 @@ public class FakeSessaoDatabase {
                 SessaoModelo.posicionar.DIREITA,
                 "/4_perseverance/imgSoloP.jpg",
                 "/4_perseverance/SoloP.jpg",
-                "Detalhe do terreno marciano."
+                "   Texturas endurecidas no solo, vestígios de processos antigos relacionados com a interação de água, preservados na superfície. -6 de agosto de 2021 por Perseverance"
         ));
 
         return lista;

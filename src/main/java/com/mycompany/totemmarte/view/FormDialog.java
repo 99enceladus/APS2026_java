@@ -1,17 +1,25 @@
 
 package com.mycompany.totemmarte.view;
 
+import com.mycompany.keyboardmuseu.simpleKeyboard;
 import com.mycompany.totemmarte.controller.SessaoController;
 import com.mycompany.totemmarte.modelo.AvaliacaoModelo;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Frame;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
-import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.JPanel;
+import javax.swing.JLabel;  // ========== ADICIONAR ESTE IMPORT ==========
+import javax.swing.JButton;
 
 public class FormDialog extends javax.swing.JDialog {
 
@@ -54,11 +62,15 @@ public class FormDialog extends javax.swing.JDialog {
         configurarTela(parent);
         carregarCombos();
         registrarEventos();
+        configurarTecladoVirtual();
     }
 
     public boolean isAvaliacaoEnviada() {
         return avaliacaoEnviada;
     }
+    
+    private JDialog tecladoDialog;
+    private simpleKeyboard tecladoVirtual;
 
     private void configurarTela(Frame parent) {
         setTitle("Avaliar visita");
@@ -102,6 +114,87 @@ public class FormDialog extends javax.swing.JDialog {
     private void registrarEventos() {
         btnEnviar.addActionListener(evt -> salvarFormulario());
     }
+    
+    private void configurarTecladoVirtual() {
+        txaMotivo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                abrirTecladoParaTextArea();
+            }
+        });
+    }
+    
+    private void abrirTecladoParaTextArea() {
+    // Criar campo temporário
+        JTextField campoTemporario = new JTextField(txaMotivo.getText(), 40);
+        campoTemporario.setFont(txaMotivo.getFont());
+    
+    // ========== CORES DO TECLADO (ADICIONAR ESTAS LINHAS) ==========
+        Color marsBackground = new Color(235, 210, 190);  // Fundo claro terroso
+        Color marsBorder = new Color(150, 120, 100);     // Cor da borda
+        Color marsText = new Color(50, 35, 25);          // Cor do texto escuro
+        Color marsButton = new Color(140, 180, 140);     // Verde para o botão OK
+    // ==============================================================
+    
+    // Criar diálogo
+        tecladoDialog = new JDialog(this, "Digitar motivo", false);
+        tecladoDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        tecladoDialog.setLayout(new java.awt.BorderLayout(10, 10));
+        tecladoDialog.getContentPane().setBackground(marsBackground); // ========== LINHA NOVA ==========
+    
+    // Painel superior
+        JPanel topPanel = new JPanel(new java.awt.BorderLayout(5, 5));
+        topPanel.setBackground(marsBackground); // ========== LINHA NOVA ==========
+        topPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 5, 10));
+    
+        JLabel instrucao = new JLabel("Digite o motivo da sua avaliação:");
+        instrucao.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        instrucao.setForeground(marsText); // ========== LINHA NOVA ==========
+        topPanel.add(instrucao, java.awt.BorderLayout.NORTH);
+        topPanel.add(campoTemporario, java.awt.BorderLayout.CENTER);
+    
+    // Botão OK estilizado
+        JButton btnOk = new JButton("OK");
+        btnOk.setFont(new java.awt.Font("Segoe UI", java.awt.Font.BOLD, 14));
+        btnOk.setBackground(marsButton); // ========== LINHA MODIFICADA ==========
+        btnOk.setForeground(marsText); // ========== LINHA NOVA ==========
+        btnOk.setFocusPainted(false); // ========== LINHA NOVA ==========
+        btnOk.addActionListener(evt -> {
+        txaMotivo.setText(campoTemporario.getText());
+        tecladoDialog.dispose();
+    });
+    
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(marsBackground); // ========== LINHA NOVA ==========
+        bottomPanel.add(btnOk);
+    
+    // Criar teclado
+        tecladoVirtual = new simpleKeyboard();
+        tecladoVirtual.attachToTextField(campoTemporario);
+        tecladoVirtual.setOnEnterCallback(() -> {
+        txaMotivo.setText(campoTemporario.getText());
+        tecladoDialog.dispose();
+    });
+    
+    // Montar diálogo
+        tecladoDialog.add(topPanel, java.awt.BorderLayout.NORTH);
+        tecladoDialog.add(tecladoVirtual, java.awt.BorderLayout.CENTER);
+        tecladoDialog.add(bottomPanel, java.awt.BorderLayout.SOUTH);
+    
+    // Configurar tamanho
+        Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+        int largura = (int)(screen.width * 0.85);
+        int altura = (int)(screen.height * 0.60);
+    
+        largura = Math.max(largura, 800);
+        altura = Math.max(altura, 500);
+    
+        tecladoDialog.setSize(largura, altura);
+        tecladoDialog.setMinimumSize(new Dimension(700, 450));
+        tecladoDialog.setLocation((screen.width - largura) / 2, screen.height - altura - 30);
+        tecladoDialog.setVisible(true);
+    }   
+    
 
     private void salvarFormulario() {
         SessaoModelo sessaoSelecionada = obterSessaoSelecionada(cmbSessao.getSelectedIndex());
@@ -197,7 +290,7 @@ public class FormDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(237, 231, 222));
-        setPreferredSize(new java.awt.Dimension(756, 800));
+        setPreferredSize(new java.awt.Dimension(756, 600));
 
         pnlHeader.setBackground(new java.awt.Color(0, 0, 0));
         pnlHeader.setPreferredSize(new java.awt.Dimension(580, 50));
@@ -332,4 +425,5 @@ public class FormDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane scpMotivo;
     private javax.swing.JTextArea txaMotivo;
     // End of variables declaration//GEN-END:variables
+
 }

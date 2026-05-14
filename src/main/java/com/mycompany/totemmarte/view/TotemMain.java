@@ -38,6 +38,9 @@ public class TotemMain extends javax.swing.JFrame {
         setSize(1280, 800);
         setLocationRelativeTo(null);
         TabsUI.aplicarEstilo(tabsGaleria);
+        
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
 
         Canva canvaHeader = new Canva();
 
@@ -56,13 +59,13 @@ public class TotemMain extends javax.swing.JFrame {
     //Vai executar o setValue após a janela terminar de abrir
         addWindowListener(new java.awt.event.WindowAdapter() {
 
-        @Override
-        public void windowOpened(java.awt.event.WindowEvent e) {
-            resetarScroll(spMarte);
-            resetarScroll(spRoversGemeos);
-            resetarScroll(spCuriosity);
-            resetarScroll(spPerseverance);
-        }
+            @Override
+            public void windowOpened(java.awt.event.WindowEvent e) {
+                resetarScroll(spMarte);
+                resetarScroll(spRoversGemeos);
+                resetarScroll(spCuriosity);
+                resetarScroll(spPerseverance);
+            }
         });
         
     }
@@ -188,6 +191,8 @@ public class TotemMain extends javax.swing.JFrame {
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setText("EXPLORAÇÃO MARTE");
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setMaximumSize(new java.awt.Dimension(800, 94));
+        lblTitulo.setPreferredSize(new java.awt.Dimension(800, 140));
         pnlHeader.add(lblTitulo, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(pnlHeader, java.awt.BorderLayout.PAGE_START);
