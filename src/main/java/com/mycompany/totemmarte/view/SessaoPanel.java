@@ -16,7 +16,6 @@ public class SessaoPanel extends javax.swing.JPanel {
         
         configurarClique();
         criarOverlay();
-        pnlImagem.setLayout(new javax.swing.OverlayLayout(pnlImagem));
     }
 
     public void configurar(SessaoModelo modelo) {
