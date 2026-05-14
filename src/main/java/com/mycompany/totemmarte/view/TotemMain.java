@@ -4,7 +4,7 @@
  */
 package com.mycompany.totemmarte.view;
 import com.mycompany.totemmarte.UI.TabsUI;
-import com.mycompany.totemmarte.UI.Canva;
+import com.mycompany.totemmarte.UI.Header;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
@@ -30,6 +30,7 @@ public class TotemMain extends javax.swing.JFrame {
         configurarBotaoAvaliacao();
         configurarAbaAvaliacoes();
         carregarSessoes();
+        pnlHeader = new Header();
 
     }
     
@@ -41,21 +42,8 @@ public class TotemMain extends javax.swing.JFrame {
         
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
-
-        Canva canvaHeader = new Canva();
-
-        pnlHeader.setLayout(new java.awt.BorderLayout());
-
-        pnlHeader.add(canvaHeader, java.awt.BorderLayout.CENTER);
-
-
-        Canva canvaFooter = new Canva();
-
-        pnlFooter.setLayout(new java.awt.BorderLayout());
-
-        pnlFooter.add(canvaFooter, java.awt.BorderLayout.CENTER);
         
-
+        configurarHeader();
     //Vai executar o setValue após a janela terminar de abrir
         addWindowListener(new java.awt.event.WindowAdapter() {
 
@@ -147,7 +135,30 @@ public class TotemMain extends javax.swing.JFrame {
         pnlResumoAvaliacoes.revalidate();
         pnlResumoAvaliacoes.repaint();
     }
+    private void configurarHeader() {
 
+        Header header = new Header();
+
+        header.setLayout(new BorderLayout());
+
+        lblTitulo.setHorizontalAlignment(
+                javax.swing.SwingConstants.CENTER);
+
+        lblTitulo.setVerticalAlignment(
+                javax.swing.SwingConstants.CENTER);
+
+        header.add(lblTitulo, BorderLayout.CENTER);
+
+        pnlHeader.removeAll();
+
+        pnlHeader.setLayout(new BorderLayout());
+
+        pnlHeader.add(header, BorderLayout.CENTER);
+
+        pnlHeader.revalidate();
+
+        pnlHeader.repaint();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -183,7 +194,7 @@ public class TotemMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pnlHeader.setBackground(new java.awt.Color(0, 0, 0));
-        pnlHeader.setPreferredSize(new java.awt.Dimension(550, 150));
+        pnlHeader.setPreferredSize(new java.awt.Dimension(1280, 150));
         pnlHeader.setLayout(new java.awt.BorderLayout());
 
         lblTitulo.setFont(new java.awt.Font("Serif", 1, 36)); // NOI18N
