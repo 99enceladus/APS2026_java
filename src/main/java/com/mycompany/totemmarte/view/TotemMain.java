@@ -40,8 +40,6 @@ public class TotemMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         TabsUI.aplicarEstilo(tabsGaleria);
         
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         
         configurarHeader();
     //Vai executar o setValue após a janela terminar de abrir
