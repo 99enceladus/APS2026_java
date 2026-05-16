@@ -6,11 +6,9 @@ package com.mycompany.totemmarte.view;
 import com.mycompany.totemmarte.UI.TabsUI;
 import com.mycompany.totemmarte.UI.Header;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import com.mycompany.totemmarte.modelo.SessaoModelo;
 import com.mycompany.totemmarte.controller.SessaoController;
 import java.util.List;
-import javax.swing.JButton;
 
 
 
@@ -27,7 +25,6 @@ public class TotemMain extends javax.swing.JFrame {
         //para colocar as sessoes
         controle= new SessaoController();
         resumoPanel = new AvaliacaoResumoPanel();
-        configurarBotaoAvaliacao();
         configurarAbaAvaliacoes();
         carregarSessoes();
         pnlHeader = new Header();
@@ -100,17 +97,6 @@ public class TotemMain extends javax.swing.JFrame {
         painel.repaint();
     }
 
-    private void configurarBotaoAvaliacao() {
-        pnlFooter.removeAll();
-        pnlFooter.setLayout(new FlowLayout(FlowLayout.CENTER, 16, 10));
-
-        JButton btnAvaliacao = new JButton("Adicionar avaliação");
-        btnAvaliacao.addActionListener(evt -> abrirAvaliacao());
-        pnlFooter.add(btnAvaliacao);
-
-        pnlFooter.revalidate();
-        pnlFooter.repaint();
-    }
 
     private void abrirAvaliacao() {
         FormDialog dialog = new FormDialog(this, controle, controle.listarSessoes(), controle.listarGrupos());
@@ -188,6 +174,7 @@ public class TotemMain extends javax.swing.JFrame {
         lblDistribuicao5 = new javax.swing.JLabel();
         lblObrasMaisAvaliadas = new javax.swing.JLabel();
         pnlFooter = new javax.swing.JPanel();
+        btnAvaliacao = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -287,10 +274,24 @@ public class TotemMain extends javax.swing.JFrame {
         pnlFooter.setBackground(new java.awt.Color(0, 0, 0));
         pnlFooter.setPreferredSize(new java.awt.Dimension(550, 50));
         pnlFooter.setLayout(new java.awt.BorderLayout());
+
+        btnAvaliacao.setText("Adicionar Avaliação");
+        btnAvaliacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvaliacaoActionPerformed(evt);
+            }
+        });
+        pnlFooter.add(btnAvaliacao, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(pnlFooter, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAvaliacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvaliacaoActionPerformed
+
+        abrirAvaliacao();
+    }//GEN-LAST:event_btnAvaliacaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +322,7 @@ public class TotemMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtualizarAvaliacoes;
+    private javax.swing.JButton btnAvaliacao;
     private javax.swing.JLabel lblDistribuicao1;
     private javax.swing.JLabel lblDistribuicao2;
     private javax.swing.JLabel lblDistribuicao3;
